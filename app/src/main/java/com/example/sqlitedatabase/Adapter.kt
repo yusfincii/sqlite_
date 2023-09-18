@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class Adapter(private var context:Context, private var dataSet:List<Person>)
     : RecyclerView.Adapter<Adapter.CardViewHolder>()
 {
+    // class which represents the  objects of card design
     inner class CardViewHolder(view:View): RecyclerView.ViewHolder(view)
     {
         var textId : TextView
@@ -18,6 +19,7 @@ class Adapter(private var context:Context, private var dataSet:List<Person>)
         var textPrice : TextView
 
         init{
+            // match
             textId = view.findViewById(R.id.textViewIdCard)
             textName = view.findViewById(R.id.textViewNameCard)
             textAge = view.findViewById(R.id.textViewAgeCard)
@@ -35,6 +37,7 @@ class Adapter(private var context:Context, private var dataSet:List<Person>)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+        // current object
         val person = dataSet[position]
 
         holder.textId.text = person.personId.toString()

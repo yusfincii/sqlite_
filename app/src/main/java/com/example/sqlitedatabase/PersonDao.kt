@@ -4,6 +4,7 @@ import android.content.ContentValues
 
 class PersonDao {
 
+    // add person with require arguments
     fun addPerson(dbHelper:DatabaseHelper, personName:String, personAge:Int, personPrice:Double)
     {
         val db = dbHelper.writableDatabase
@@ -18,10 +19,11 @@ class PersonDao {
         db.close()
     }
 
+    // read all persons from database
     fun readPerson(dbHelper: DatabaseHelper) : ArrayList<Person>
     {
         val db = dbHelper.writableDatabase
-
+        // arraylist which keep person objects
         val personList = ArrayList<Person>()
 
         val cursor = db.rawQuery("SELECT * FROM person", null)
@@ -40,6 +42,7 @@ class PersonDao {
         return personList
     }
 
+    // update person with require arguments
     fun updatePerson(dbHelper: DatabaseHelper, personId:Int, personName:String,
                      personAge: Int, personPrice: Double)
     {
@@ -49,11 +52,12 @@ class PersonDao {
         values.put("person_name", personName)
         values.put("person_age", personAge)
         values.put("person_price", personPrice)
-
+        // update process should be based on person_id, bcs it's unique
         db.update("person", values, "person_id=?", arrayOf(personId.toString()))
         db.close()
     }
 
+    // search person with given keyword argument
     fun searchPerson(dbHelper: DatabaseHelper, keyWord:String) : ArrayList<Person>
     {
         val db = dbHelper.writableDatabase
@@ -77,6 +81,7 @@ class PersonDao {
 
     }
 
+    // delete process with given argument(personId)
     fun deletePerson(dbHelper: DatabaseHelper, personId:Int)
     {
         val db = dbHelper.writableDatabase
